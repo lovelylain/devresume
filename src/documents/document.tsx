@@ -50,6 +50,7 @@ export function ResumeDocument({ resume }: Props) {
 
   const accentColor = meta && meta.accentColor;
   const baseFontSize = meta && meta.baseFontSize;
+  const renderOrder = meta && meta.renderOrder || [];
 
   const theme = useMemo(
     () => createTheme(accentColor, baseFontSize),
@@ -57,42 +58,43 @@ export function ResumeDocument({ resume }: Props) {
   );
   const styles = createStyles(theme);
 
+  const parts = {};
+  basics && (parts["basics"] = <BasicsSection theme={theme} basics={basics} />);
+  skills && Array.isArray(skills) && (parts["skills"] =
+    <SkillsSection theme={theme} skills={skills} />
+  );
+  work && Array.isArray(work) && (parts["work"] =
+    <WorkSection theme={theme} work={work} />
+  );
+  projects && Array.isArray(projects) && (parts["projects"] =
+    <ProjectsSection theme={theme} projects={projects} />
+  );
+  education && Array.isArray(education) && (parts["education"] =
+    <EducationSection theme={theme} education={education} />
+  );
+  awards && Array.isArray(awards) && (parts["awards"] =
+    <AwardsSection theme={theme} awards={awards} />
+  );
+  certificates && Array.isArray(certificates) && (parts["certificates"] =
+    <CertificatesSection theme={theme} certificates={certificates} />
+  );
+  publications && Array.isArray(publications) && (parts["publications"] =
+    <PublicationsSection theme={theme} publications={publications} />
+  );
+  volunteer && Array.isArray(volunteer) && (parts["volunteer"] =
+    <VolunteerSection theme={theme} volunteer={volunteer} />
+  );
+  const rows = Object.entries(parts).map(([k,v],i) => {
+      const pos = renderOrder.indexOf(k);
+      return {i: pos >= 0 ? pos : renderOrder.length + i, v}
+    }).sort((a,b) => a.i-b.i).map(o => o.v);
+
   return (
     <Document>
       <Page style={styles.page} size="A4">
         <Bar theme={theme} />
         <VStack gap={theme.space[10]}>
-          {basics && <BasicsSection theme={theme} basics={basics} />}
-          {skills && Array.isArray(skills) && (
-            <SkillsSection theme={theme} skills={skills} />
-          )}
-          {work && Array.isArray(work) && (
-            <WorkSection theme={theme} work={work} />
-          )}
-
-          {projects && Array.isArray(projects) && (
-            <ProjectsSection theme={theme} projects={projects} />
-          )}
-
-          {education && Array.isArray(education) && (
-            <EducationSection theme={theme} education={education} />
-          )}
-
-          {awards && Array.isArray(awards) && (
-            <AwardsSection theme={theme} awards={awards} />
-          )}
-
-          {certificates && Array.isArray(certificates) && (
-            <CertificatesSection theme={theme} certificates={certificates} />
-          )}
-
-          {publications && Array.isArray(publications) && (
-            <PublicationsSection theme={theme} publications={publications} />
-          )}
-
-          {volunteer && Array.isArray(volunteer) && (
-            <VolunteerSection theme={theme} volunteer={volunteer} />
-          )}
+          {rows}
         </VStack>
       </Page>
     </Document>
