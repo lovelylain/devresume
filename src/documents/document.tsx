@@ -58,7 +58,7 @@ export function ResumeDocument({ resume }: Props) {
   );
   const styles = createStyles(theme);
 
-  const parts = {};
+  const parts: { [key: string]: JSX.Element } = {};
   basics && (parts["basics"] = <BasicsSection theme={theme} basics={basics} />);
   skills && Array.isArray(skills) && (parts["skills"] =
     <SkillsSection theme={theme} skills={skills} />
