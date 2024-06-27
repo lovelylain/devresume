@@ -13,7 +13,7 @@ function createHighlightedElements() {
   highligher.addStringField("email");
   highligher.addStringField("summary", { markdown: true });
   highligher.pushArrayOfObjects("profiles");
-  highligher.addEnumField("network", ["github", "network"]);
+  highligher.addEnumField("network", ["github", "linkedin"]);
   highligher.pop();
   highligher.pop();
 

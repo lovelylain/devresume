@@ -1,5 +1,5 @@
 <p align="center">
-   <a href="https://devresume.app" target="_blank">
+   <a href="https://lovelylain.github.io/devresume/" target="_blank">
     <img src="screenshot.png" alt="Devices preview" />
   </a>
 </p>
@@ -12,7 +12,7 @@
   
 <br />
 
-Website: https://devresume.app
+Website: https://lovelylain.github.io/devresume/
 
 **Completely free** • **No sign-up** • **Live preview** • **Works offline** • **Unlimited exports**
 

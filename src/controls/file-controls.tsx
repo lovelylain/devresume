@@ -14,7 +14,7 @@ export function FileControls({onSave, onOpen, onNew, style}: Props) {
     const {t} = useTranslation()
     return (
         <div className="FileControls" style={style}>
-            <a title="About" data-testin="about" target="_blank" href="https://github.com/vangelov/devresume">
+            <a title="About" data-testin="about" target="_blank" href="https://github.com/lovelylain/devresume">
                 <InfoIcon size={16} />
             </a>
             <button data-testid="save" onClick={onSave}>
