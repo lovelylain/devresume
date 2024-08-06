@@ -1,4 +1,4 @@
-import {RefObject, useCallback, useRef, useState} from 'react'
+import {RefObject, useCallback, useRef} from 'react'
 import {PDF, useRender, useScale} from './rendering'
 import {Schema, YAMLEditor} from './editing'
 import 'split-pane-react/esm/themes/default.css'
@@ -17,16 +17,14 @@ export function App() {
     const codeMirrorRef: RefObject<ReactCodeMirrorRef> = useRef(null)
 
     // Parsing
-    const {title, setTitle, yaml, setYAML} = useYAMLParsing({
-        getDefault: () => ({ title: DEFAULT_TITLE, yaml: SAMPLE_YAML }),
-        onYAMLParsed: useCallback(
-            (yaml: string, json: object | undefined) => {
-                if (json) queue.push(json)
-                else if (!yaml) queue.clear()
-            },
-            [queue]
-        ),
-    })
+    const onYAMLParsed = useCallback(
+        (yaml: string, json: object | undefined) => {
+            if (json) queue.push(json)
+            else if (!yaml) queue.clear()
+        },
+        [queue]
+    )
+    const {title, setTitle, yaml, setYAML} = useYAMLParsing({onYAMLParsed})
 
     // Persistence
     const onFileOpened = useCallback(
