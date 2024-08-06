@@ -1,40 +1,46 @@
 import { useCallback, useState } from "react";
 import { useDebouncedEffect } from "../utils";
 import { yamlToJSON } from "./yaml-to-json";
-import { SAMPLE_YAML } from "./sample";
+
+interface Data {
+  title: string;
+  yaml: string;
+}
 
 type Props = {
+  getDefault: () => Data;
   onYAMLParsed: (yaml: string, json: object | undefined) => void;
 };
 
 export const STORAGE_KEY = "yaml";
 
-export function useYAMLParsing({ onYAMLParsed }: Props) {
-  const [yaml, setYAML] = useState(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-
-    if (!stored && stored !== "") {
-      return SAMPLE_YAML;
-    }
-
-    return stored || "";
-  });
+export function useYAMLParsing({ getDefault, onYAMLParsed }: Props) {
+  let data: Data;
+  try {
+    data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "") as Data;
+    if (!data.yaml) throw Error();
+  } catch (e) {
+    data = getDefault();
+  }
+  const [title, setTitle] = useState(data.title);
+  const [yaml, setYAML] = useState(data.yaml);
 
   const onCodeUpdate = useCallback(() => {
-    localStorage.setItem(STORAGE_KEY, yaml);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ title, yaml }));
     const { json, errors } = yamlToJSON(yaml);
 
     if (process.env.NODE_ENV !== "test") {
-      if (json) console.log("JSON:", json);
       if (errors) console.log("Errors:", errors);
     }
 
     onYAMLParsed(yaml, json);
-  }, [yaml, onYAMLParsed]);
+  }, [title, yaml, onYAMLParsed]);
 
   useDebouncedEffect(onCodeUpdate);
 
   return {
+    setTitle,
+    title,
     setYAML,
     yaml,
   };

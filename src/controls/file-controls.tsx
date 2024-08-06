@@ -10,13 +10,17 @@ type Props = {
     style?: CSSProperties
 }
 
+const onAbout = () => {
+    window.open("https://github.com/lovelylain/devresume", "_blank", "noreferrer");
+};
+
 export function FileControls({onSave, onOpen, onNew, style}: Props) {
     const {t} = useTranslation()
     return (
         <div className="FileControls" style={style}>
-            <a title="About" data-testin="about" target="_blank" href="https://github.com/lovelylain/devresume">
-                <InfoIcon size={16} />
-            </a>
+            <button title="About" data-testid="about" onClick={onAbout}>
+                <InfoIcon size={14} />
+            </button>
             <button data-testid="save" onClick={onSave}>
                 <DownloadIcon size={14} style={{marginRight: '0.5rem'}} />
                 {t('save')}

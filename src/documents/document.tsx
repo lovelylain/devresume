@@ -58,31 +58,31 @@ export function ResumeDocument({ resume }: Props) {
   );
   const styles = createStyles(theme);
 
-  const parts: { [key: string]: JSX.Element } = {};
-  basics && (parts["basics"] = <BasicsSection theme={theme} basics={basics} />);
+  const parts: Record<string, JSX.Element> = {};
+  basics && (parts["basics"] = <BasicsSection key="basics" theme={theme} basics={basics} />);
   skills && Array.isArray(skills) && (parts["skills"] =
-    <SkillsSection theme={theme} skills={skills} />
+    <SkillsSection key="skills" theme={theme} skills={skills} />
   );
   work && Array.isArray(work) && (parts["work"] =
-    <WorkSection theme={theme} work={work} />
+    <WorkSection key="work" theme={theme} work={work} />
   );
   projects && Array.isArray(projects) && (parts["projects"] =
-    <ProjectsSection theme={theme} projects={projects} />
+    <ProjectsSection key="projects" theme={theme} projects={projects} />
   );
   education && Array.isArray(education) && (parts["education"] =
-    <EducationSection theme={theme} education={education} />
+    <EducationSection key="education" theme={theme} education={education} />
   );
   awards && Array.isArray(awards) && (parts["awards"] =
-    <AwardsSection theme={theme} awards={awards} />
+    <AwardsSection key="awards" theme={theme} awards={awards} />
   );
   certificates && Array.isArray(certificates) && (parts["certificates"] =
-    <CertificatesSection theme={theme} certificates={certificates} />
+    <CertificatesSection key="certificates" theme={theme} certificates={certificates} />
   );
   publications && Array.isArray(publications) && (parts["publications"] =
-    <PublicationsSection theme={theme} publications={publications} />
+    <PublicationsSection key="publications" theme={theme} publications={publications} />
   );
   volunteer && Array.isArray(volunteer) && (parts["volunteer"] =
-    <VolunteerSection theme={theme} volunteer={volunteer} />
+    <VolunteerSection key="volunteer" theme={theme} volunteer={volunteer} />
   );
   const rows = Object.entries(parts).map(([k,v],i) => {
       const pos = renderOrder.indexOf(k);

@@ -1,11 +1,19 @@
-export const SAMPLE_YAML = `
+export const DEFAULT_TITLE = "简历";
+export const SAMPLE_YAML = `\
+meta:
+  renderOrder:
+    - basics
+    - education
+    - work
+    - projects
+
 basics:
   name: 姓名
   label: 求职岗位
   email: youremail@gmail.com
   phone: (+86) 136-8888-8888
   url: www.yourblog.com
-  summary: 
+  summary:
     熟练掌握全栈开发和敏捷开发方法，具备 10 年以上的软件开发经验。拥有卓越的领导能力和团队管理经验
     ，擅长协调和激励团队以实现共同目标。在多个大型项目中担任核心开发者，成功交付高质量的软件解决方案。
   profiles:
@@ -17,11 +25,11 @@ work:
     position: 软件程序员
     location: 上海，中国
     url: http://piedpiper.example.com
-    summary: 
+    summary:
       在 FLAG 科技公司工作期间，我担任软件工程师的角色，负责关键模块的开发和优化。
     startDate: 2013-12
     endDate: 2014-11
-    highlights: 
+    highlights:
       - 设计并实现数据库结构的优化方案，将查询时间减少50%，显著改善系统的响应速度。
       - 根据业务场景扩展了线性规划求解器的核心组件，成功将复杂物流规划业务落地。
       - 参与团队的性能优化工作，使用[技术]将系统的响应时间从5秒降低到2秒，提升了用户的体验。

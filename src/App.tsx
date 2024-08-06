@@ -7,24 +7,26 @@ import {PanesLayout} from './panes-layout'
 import './app.css'
 import {useYAMLPersistence, downloadFile} from './persistence'
 import {useYAMLParsing} from './parsing'
+import {DEFAULT_TITLE, SAMPLE_YAML} from "./parsing/sample";
 import './i18n'
 import {ReactCodeMirrorRef} from '@uiw/react-codemirror'
 
 export function App() {
-    const {queue, blob, setBlob} = useRender()
+    const {queue, blob} = useRender()
     const {zoomIn, zoomOut, scale, maxScaleReached, minScaleReached} = useScale({minScale: 0.5, maxScale: 2})
-    const [title, setTitle] = useState('Untitled')
     const codeMirrorRef: RefObject<ReactCodeMirrorRef> = useRef(null)
 
     // Parsing
-    const onYAMLParsed = useCallback(
-        (yaml: string, json: object | undefined) => {
-            if (json) queue.push(json)
-            else if (!yaml) queue.clear()
-        },
-        [queue]
-    )
-    const {setYAML, yaml} = useYAMLParsing({onYAMLParsed})
+    const {title, setTitle, yaml, setYAML} = useYAMLParsing({
+        getDefault: () => ({ title: DEFAULT_TITLE, yaml: SAMPLE_YAML }),
+        onYAMLParsed: useCallback(
+            (yaml: string, json: object | undefined) => {
+                if (json) queue.push(json)
+                else if (!yaml) queue.clear()
+            },
+            [queue]
+        ),
+    })
 
     // Persistence
     const onFileOpened = useCallback(
@@ -48,14 +50,13 @@ export function App() {
     }, [blob, title])
 
     const onNewResume = useCallback(() => {
-        setTitle('Untitled')
-        setYAML('')
-        setBlob(null)
+        setTitle(DEFAULT_TITLE)
+        setYAML(SAMPLE_YAML)
 
         if (codeMirrorRef.current && codeMirrorRef.current.view) {
             codeMirrorRef.current.view.focus()
         }
-    }, [setYAML, setBlob])
+    }, [setYAML])
 
     return (
         <div className="App">
