@@ -33,7 +33,7 @@ function createHighlightedElements() {
   highligher.addArrayOfStringsField("keywords");
   highligher.pop();
 
-  highligher.pushArrayOfObjects("work");
+  highligher.pushArrayOfObjects("projects");
   highligher.addStringField("name");
   highligher.addStringField("description", { markdown: true });
   highligher.addStringField("url");
@@ -109,11 +109,9 @@ export const Schema = memo(function () {
         }}
       >
         <span className="Schema-Comment">
-          // Use this as a guide. It shows the supported fields from the JSON
-          resume schema
+          // Use this as a guide. It shows the supported fields from the JSON resume schema
           <br />
-          // (jsonresume.org/schema) expressed in TypeScript so they're easier
-          to read. <br />
+          // (jsonresume.org/schema) expressed in TypeScript so they're easier to read. <br />
           // -------------------------------------------------------------------
           <br />
           // Where noted you can use the following Markdown subset: <br />

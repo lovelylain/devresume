@@ -7,6 +7,7 @@ export type Job = {
   startDate?: string | number;
   endDate?: string | number;
   highlights?: Array<string>;
+  blankLine?: number;
 };
 
 export type Profile = {
@@ -38,6 +39,7 @@ export type Project = {
   startDate?: string | number;
   endDate?: string | number;
   url?: string;
+  blankLine?: number;
 };
 
 export type EducationPlace = {
@@ -48,6 +50,7 @@ export type EducationPlace = {
   courses?: Array<string | null>;
   startDate?: string | number;
   endDate?: string | number;
+  blankLine?: number;
 };
 
 export type Award = {
@@ -55,6 +58,7 @@ export type Award = {
   date?: string | number;
   awarder?: string;
   summary?: string;
+  blankLine?: number;
 };
 
 export type Certificate = {
@@ -62,6 +66,7 @@ export type Certificate = {
   date?: string | number;
   url?: string;
   issuer?: string;
+  blankLine?: number;
 };
 
 export type Publication = {
@@ -70,6 +75,7 @@ export type Publication = {
   releaseDate?: string | number;
   url?: string;
   summary?: string;
+  blankLine?: number;
 };
 
 export type Voluteering = {
@@ -80,6 +86,7 @@ export type Voluteering = {
   highlights?: Array<string | null>;
   startDate?: string | number;
   endDate?: string | number;
+  blankLine?: number;
 };
 
 export type Meta = {

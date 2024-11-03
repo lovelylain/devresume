@@ -23,6 +23,7 @@ export function CerticateItem({ certificate, theme }: CertificateItemProps) {
       url={certificate.url}
       titleDetails={titleDetails}
       startDate={certificate.date}
+      blankLine={certificate.blankLine}
     />
   );
 }
@@ -39,13 +40,7 @@ export function CertificatesSection({ theme, certificates }: SectionProps) {
     <EventsSection theme={theme} title="Certificates">
       {certificates.map(
         (certificate, index) =>
-          certificate && (
-            <CerticateItem
-              key={index}
-              theme={theme}
-              certificate={certificate}
-            />
-          )
+          certificate && <CerticateItem key={index} theme={theme} certificate={certificate} />
       )}
     </EventsSection>
   );

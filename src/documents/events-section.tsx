@@ -29,6 +29,7 @@ type EventItemProps = {
   children?: ReactNode;
   startDate?: string | number;
   endDate?: string | number;
+  blankLine?: number;
   theme: Theme;
 };
 
@@ -40,6 +41,7 @@ export function EventItem({
   titleDetails,
   startDate,
   endDate,
+  blankLine,
   theme,
 }: EventItemProps) {
   return (
@@ -91,6 +93,7 @@ export function EventItem({
       </VStack>
 
       {children && <VStack gap={theme.space[2]}>{children}</VStack>}
+      {blankLine && <Text>{"\n".repeat(blankLine)}</Text>}
     </VStack>
   );
 }
